@@ -1,14 +1,13 @@
 /*!
-Theme Name: Personal theme
-Theme URI: https://github.com/yaleksandr89/wp-ya
+Theme Name: Wordpress & Twig
+Theme URI: https://github.com/yaleksandr89
 Author: Aleksandr Yurchenko
 Author URI: https://alexanderyurchenko.ru/
-Description: WordPress theme for personal use.
+Description: Wordpress theme with integrated 'Symfony Var Dumper' and template engine 'Twig'
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: [YA] Personal WP theme
-Tags: wordpress theme, personal theme, blog theme, portfolio theme, wordpress development, wordpress yaleksandr89, Aleksandr Yurchenko
+Tags: wordpress theme, twig, symfony var dumper, wordpress&twig
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
