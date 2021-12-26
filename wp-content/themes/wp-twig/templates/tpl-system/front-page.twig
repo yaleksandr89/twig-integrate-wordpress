@@ -2,7 +2,7 @@
 <div id="page">
     <div id="content">
 
-        {% if wp_the_loop()|length > 0  %}
+        {% if wp_the_loop()|length > 0 %}
             {% for post in wp_the_loop() %}
                 <div class="post">
                     <h1 class="title">
@@ -12,7 +12,7 @@
                     </h1>
                     <p class="byline">
                         <small>
-                            Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY')}} by
+                            Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }} by
                             {{ wp_call_func('the_author_posts_link') }}
                             {% if wp_call_func('is_user_logged_in') and post.post_author == wp_call_func('get_current_user_id') %}
                                 |
@@ -34,26 +34,13 @@
             <li>
                 <h2>Categories</h2>
                 <ul>
-                    <li><a href="#">Aliquam libero</a></li>
-                    <li><a href="#">Consectetuer adipiscing elit</a></li>
-                    <li><a href="#">Metus aliquam pellentesque</a></li>
-                    <li><a href="#">Suspendisse iaculis mauris</a></li>
-                    <li><a href="#">Urnanet non molestie semper</a></li>
-                    <li><a href="#">Proin gravida orci porttitor</a></li>
+                    {{ get_sidebar('category') }}
                 </ul>
             </li>
             <li>
                 <h2>Archives</h2>
                 <ul>
-                    <li><a href="#">September</a> (23)</li>
-                    <li><a href="#">August</a> (31)</li>
-                    <li><a href="#">July</a> (31)</li>
-                    <li><a href="#">June</a> (30)</li>
-                    <li><a href="#">May</a> (31)</li>
-                    <li><a href="#">April</a> (30)</li>
-                    <li><a href="#">March</a> (31)</li>
-                    <li><a href="#">February</a> (28)</li>
-                    <li><a href="#">January</a> (31)</li>
+                    {{ get_sidebar('archive') }}
                 </ul>
             </li>
         </ul>

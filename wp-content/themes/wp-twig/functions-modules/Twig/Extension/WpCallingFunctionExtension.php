@@ -27,15 +27,22 @@ class WpCallingFunctionExtension extends AbstractExtension
 
     /**
      * @param string $nameWpFunction
-     * @param string $arg
+     * @param mixed ...$args
      *
      * @return mixed
      */
-    public function callingWordpressFunction(string $nameWpFunction, string $arg = ''): mixed
+    public function callingWordpressFunction(string $nameWpFunction, ...$args): mixed
     {
         if (function_exists( $nameWpFunction)){
-            if ('' !== $arg) {
-                return $nameWpFunction($arg);
+            if (count($args) > 0) {
+
+                if (is_array($args[0])){
+                    return $nameWpFunction(current($args));
+                }
+
+                $result = implode(',', $args);
+
+                return $nameWpFunction($result);
             }
 
             return $nameWpFunction();

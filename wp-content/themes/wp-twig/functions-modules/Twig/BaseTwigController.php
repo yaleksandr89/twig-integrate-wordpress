@@ -11,6 +11,7 @@ use FunctionsModules\Twig\Extension\WpCallingFunctionExtension;
 use FunctionsModules\Twig\Extension\WpFilterExtension;
 use FunctionsModules\Twig\Extension\WpGetFooterExtension;
 use FunctionsModules\Twig\Extension\WpGetHeaderExtension;
+use FunctionsModules\Twig\Extension\WpGetSidebarExtension;
 use FunctionsModules\Twig\Extension\WpTheLoopExtension;
 use FunctionsModules\Utils\Filesystem;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -51,6 +52,7 @@ abstract class BaseTwigController
         $this->environment->addExtension(new WpGetFooterExtension()); // {% do get_footer() %} / {{ get_footer() }}
         $this->environment->addExtension(new WpCallingFunctionExtension()); // {% do wp_call_func('name', 'arg') %} / {{ wp_call_func('name', 'arg') }}
         $this->environment->addExtension(new WpTheLoopExtension()); // {% do wp_the_loop() %} / {{ wp_the_loop() }}
+        $this->environment->addExtension(new WpGetSidebarExtension()); // {% do get_sidebar() %} / {{ get_sidebar() }}
         $this->environment->addGlobal('app', [
             'get' => $_GET,
             'post' => $_POST,
