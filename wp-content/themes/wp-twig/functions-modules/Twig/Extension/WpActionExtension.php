@@ -5,7 +5,7 @@ namespace FunctionsModules\Twig\Extension;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class WordPressFilterExtension extends AbstractExtension
+class WpActionExtension extends AbstractExtension
 {
     /**
      * @return TwigFunction[]
@@ -13,7 +13,7 @@ class WordPressFilterExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('filter', [$this, 'wordpressFilter'], ['needs_context' => true]),
+            new TwigFunction('action', [$this, 'wordpressAction'], ['needs_context' => true]),
         ];
     }
 
@@ -22,14 +22,14 @@ class WordPressFilterExtension extends AbstractExtension
      */
     public function getName(): string
     {
-        return 'filter';
+        return 'action';
     }
 
-    public function wordpressFilter($context): void
+    public function wordpressAction($context): void
     {
         $args = func_get_args();
-        array_shift( $args );
+        array_shift($args);
         $args[] = $context;
-        echo apply_filters(...$args);
+        do_action(...$args);
     }
 }

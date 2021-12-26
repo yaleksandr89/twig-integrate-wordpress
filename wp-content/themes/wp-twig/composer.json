@@ -8,7 +8,7 @@
             "FunctionsModules\\": "functions-modules/"
         },
         "files": [
-            "init/constants.php"
+          "functions-modules/Utils/Helper/constants.php"
         ]
     }
 }

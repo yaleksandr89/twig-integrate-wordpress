@@ -9,12 +9,9 @@ use Twig\Error\SyntaxError;
 
 class TwigController extends BaseTwigController
 {
-    /** @var string */
-    private string $pathToTemplate = '/templates/';
-
     public function __construct()
     {
-        parent::__construct([get_template_directory() . $this->pathToTemplate]);
+        parent::__construct([WP_TWIG_DIR_TEMPLATE]);
         add_filter('template_include', [$this, 'template_include']);
     }
 
@@ -35,7 +32,7 @@ class TwigController extends BaseTwigController
         preg_match('/template-canvas.php/', $template, $templateNotFound);
 
         if ('template-canvas.php' === array_pop($templateNotFound)) {
-            $pathToSystemTemplate = WP_TWIG_DIR_PATH . $this->pathToTemplate . $tplFolder;
+            $pathToSystemTemplate = WP_TWIG_DIR_TEMPLATE . '/' . $tplFolder;
             $this->creatingTemplateIfNotExist($pathToSystemTemplate, $tplFolder, $tplExtension);
         } else {
             $tplName = str_replace($tplExtension, '', $findTemplate[1]);
@@ -47,14 +44,15 @@ class TwigController extends BaseTwigController
      * @param array $params
      *
      * @return void
+     * @throws LoaderError
      */
     private function initializationTemplate(array $params): void
     {
-        $this->createFileIfNotExist($params['pathToSystemTemplate'] . $params['templateName'] . $params['tplExtension'], $params['templateName']);
+        $this->createFileIfNotExist($params['pathToSystemTemplate'] . $params['templateName'] . $params['tplExtension']);
         try {
             $this->render($params['tplFolder'] . $params['templateName'], $this->getWpGlobalVariable());
         } catch (LoaderError|RuntimeError|SyntaxError $e) {
-            echo $e->getMessage();
+            throw new LoaderError($e->getMessage());
         }
     }
 
@@ -64,6 +62,7 @@ class TwigController extends BaseTwigController
      * @param string $tplExtension
      *
      * @return void
+     * @throws LoaderError
      */
     private function creatingTemplateIfNotExist(string $pathToSystemTemplate, string $tplFolder, string $tplExtension): void
     {

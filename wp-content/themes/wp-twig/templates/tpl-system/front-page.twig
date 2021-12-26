@@ -1,1 +1,58 @@
-The /www/wordpress/wp-twig/wp-content/themes/wp-twig/templates/tpl-system/front-page.twig is initialized
+{% do get_header('header-test') %}
+<div id="page">
+    <div id="content">
+        <div class="post">
+            <h1 class="title">About This Website</h1>
+            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
+            <div class="entry">
+                <p><strong>Brewed Coffee </strong> is a free template from <a href="http://freecsstemplates.org/">Free CSS Templates</a> released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>. The flower photo is fromt <a href="http://www.pdphoto.org/">PDPhoto.org</a>. You're free to use this template for both commercial or personal use. I only ask that you link back to <a href="http://freecsstemplates.org/">my site</a> in some way. Enjoy :)</p>
+            </div>
+        </div>
+        <div class="post">
+            <h2 class="title">Risus Pellentesque Pharetra</h2>
+            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
+            <div class="entry">
+                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. </p>
+                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Proin gravida orci  enim accumsan lacinia. </p>
+            </div>
+        </div>
+        <div class="post">
+            <h2 class="title">Porttitor Enim Accumsan</h2>
+            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
+            <div class="entry">
+                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. </p>
+                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Proin gravida orci  enim accumsan lacinia. </p>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <ul>
+            <li>
+                <h2>Categories</h2>
+                <ul>
+                    <li><a href="#">Aliquam libero</a></li>
+                    <li><a href="#">Consectetuer adipiscing elit</a></li>
+                    <li><a href="#">Metus aliquam pellentesque</a></li>
+                    <li><a href="#">Suspendisse iaculis mauris</a></li>
+                    <li><a href="#">Urnanet non molestie semper</a></li>
+                    <li><a href="#">Proin gravida orci porttitor</a></li>
+                </ul>
+            </li>
+            <li>
+                <h2>Archives</h2>
+                <ul>
+                    <li><a href="#">September</a> (23)</li>
+                    <li><a href="#">August</a> (31)</li>
+                    <li><a href="#">July</a> (31)</li>
+                    <li><a href="#">June</a> (30)</li>
+                    <li><a href="#">May</a> (31)</li>
+                    <li><a href="#">April</a> (30)</li>
+                    <li><a href="#">March</a> (31)</li>
+                    <li><a href="#">February</a> (28)</li>
+                    <li><a href="#">January</a> (31)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% do get_footer() %}

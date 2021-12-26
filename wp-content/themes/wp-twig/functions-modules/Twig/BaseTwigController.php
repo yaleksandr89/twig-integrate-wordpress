@@ -3,8 +3,11 @@
 namespace FunctionsModules\Twig;
 
 use FunctionsModules\Twig\Extension\SymfonyDebugExtension;
-use FunctionsModules\Twig\Extension\WordPressActionExtension;
-use FunctionsModules\Twig\Extension\WordPressFilterExtension;
+use FunctionsModules\Twig\Extension\WpActionExtension;
+use FunctionsModules\Twig\Extension\WpCallingFunctionExtension;
+use FunctionsModules\Twig\Extension\WpFilterExtension;
+use FunctionsModules\Twig\Extension\WpGetFooterExtension;
+use FunctionsModules\Twig\Extension\WpGetHeaderExtension;
 use FunctionsModules\Utils\Filesystem;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
@@ -35,8 +38,11 @@ abstract class BaseTwigController
         ]);
 
         $this->environment->addExtension(new SymfonyDebugExtension(new VarCloner(), new HtmlDumper())); // Подключение Symfony VarDumper
-        $this->environment->addExtension(new WordPressActionExtension()); // Подключение WP action
-        $this->environment->addExtension(new WordPressFilterExtension()); // Подключение WP filter
+        $this->environment->addExtension(new WpActionExtension()); // {% do action('robots_txt') %}
+        $this->environment->addExtension(new WpFilterExtension()); // {% do filter('the_content', post.post_content ) %}
+        $this->environment->addExtension(new WpGetHeaderExtension()); // {% do get_header() %}
+        $this->environment->addExtension(new WpGetFooterExtension()); // {% do get_footer() %}
+        $this->environment->addExtension(new WpCallingFunctionExtension()); // {% do call_wp_func('name', 'arg') %}
         $this->environment->addGlobal('app', [
             'get' => $_GET,
             'post' => $_POST,
