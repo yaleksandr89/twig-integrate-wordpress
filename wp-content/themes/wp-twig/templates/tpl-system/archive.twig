@@ -1,1 +1,28 @@
-The /www/wordpress/wp-twig/wp-content/themes/wp-twig/templates/tpl-system/archive.twig is initialized
+{{ get_header() }}
+<div id="page">
+    <div id="content">
+        {% if wp_the_loop()|length > 0 %}
+            {% for post in wp_the_loop() %}
+                <div class="post">
+                    <h1 class="title">
+                        <a href="{{ wp_call_func('get_permalink', post.ID) }}">
+                            {{ post.post_title }}
+                        </a>
+                    </h1>
+                    <p class="byline">
+                        <small>
+                            Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }} by
+                            {{ wp_call_func('the_author_posts_link') }}
+                        </small>
+                    </p>
+                    <div class="entry">
+                        {{ wp_call_func('get_the_excerpt', post.ID) }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Записи отсутствуют.</p>
+        {% endif %}
+    </div>
+</div>
+{{ get_footer() }}
