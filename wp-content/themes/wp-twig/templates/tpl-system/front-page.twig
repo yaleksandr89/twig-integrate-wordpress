@@ -1,12 +1,11 @@
 {{ get_header() }}
 <div id="page">
     <div id="content">
-
         {% if wp_the_loop()|length > 0 %}
             {% for post in wp_the_loop() %}
                 <div class="post">
                     <h1 class="title">
-                        <a href="{{ wp_call_func('get_permalink') }}">
+                        <a href="{{ wp_call_func('get_permalink', post.ID) }}">
                             {{ post.post_title }}
                         </a>
                     </h1>
@@ -14,10 +13,6 @@
                         <small>
                             Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }} by
                             {{ wp_call_func('the_author_posts_link') }}
-                            {% if wp_call_func('is_user_logged_in') and post.post_author == wp_call_func('get_current_user_id') %}
-                                |
-                                <a href="{{ wp_call_func('get_edit_post_link', post.ID) }}">Edit</a>
-                            {% endif %}
                         </small>
                     </p>
                     <div class="entry">

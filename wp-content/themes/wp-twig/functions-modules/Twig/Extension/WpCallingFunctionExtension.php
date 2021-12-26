@@ -40,9 +40,7 @@ class WpCallingFunctionExtension extends AbstractExtension
                     return $nameWpFunction(current($args));
                 }
 
-                $result = implode(',', $args);
-
-                return $nameWpFunction($result);
+                return $nameWpFunction(...$args);
             }
 
             return $nameWpFunction();

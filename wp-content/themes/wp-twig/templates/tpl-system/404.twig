@@ -1,1 +1,13 @@
-The /www/wordpress/wp-twig/wp-content/themes/wp-twig/templates/tpl-system/404.twig is initialized
+{{ get_header() }}
+<div id="page">
+    <div id="content">
+        <h2 class="h2-404">Запрашиваемая страница не найдена!</h2>
+        <div class="img-wrap-404">
+            <img src="{{ wp_call_func('getConstant', 'WP_TWIG_URL_iMAGES') }}/404.gif" alt="image 404 page">
+        </div>
+        <div class="link-back-404">
+            <a href="{{ wp_call_func('get_home_url') }}">Вернуться на главную</a>
+        </div>
+    </div>
+</div>
+{{ get_footer() }}

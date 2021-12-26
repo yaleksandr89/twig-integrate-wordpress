@@ -1,1 +1,17 @@
-The /www/wordpress/wp-twig/wp-content/themes/wp-twig/templates/tpl-system/single.twig is initialized
+{% set post = wordpress.WP_POST %}
+{% set postAuthorId = post.post_author|to_int %}
+{% set firstLastNameAuthor = wp_call_func('get_the_author_meta', 'user_firstname',postAuthorId) ~ ' ' ~ wp_call_func('get_the_author_meta', 'user_lastname',postAuthorId) %}
+
+{{ get_header() }}
+<div id="page">
+    <div id="content">
+        <h2>{{ post.post_title }}</h2>
+        <small>{{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }}</small><br>
+        <small>Author: {{ firstLastNameAuthor }}</small>
+        <div>{{ post.post_content|raw }}</div>
+        <div>
+            <a href="{{ wp_call_func('get_home_url') }}">Вернуться на главную</a>
+        </div>
+    </div>
+</div>
+{{ get_footer() }}

@@ -82,3 +82,8 @@ function getConstants(): array
         'WP_TWIG_DIR_TEMPLATE'     => WP_TWIG_DIR_TEMPLATE,
     ];
 }
+
+function getConstant(string $name): string
+{
+    return constant($name);
+}

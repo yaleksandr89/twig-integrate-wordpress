@@ -161,7 +161,6 @@ class TwigController extends BaseTwigController
             'webServerVariables' => WpGlobalVariableStaticStorage::getWebServerVariables(),
         ];
 
-
         if ($post = WpGlobalVariableStaticStorage::getWpPost()) {
             $wpGlobalVariable['wordpress']['WP_POST'] = $post;
         }
