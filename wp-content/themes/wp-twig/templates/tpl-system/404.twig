@@ -3,7 +3,7 @@
     <div id="content">
         <h2 class="h2-404">Запрашиваемая страница не найдена!</h2>
         <div class="img-wrap-404">
-            <img src="{{ wp_call_func('getConstant', 'WP_TWIG_URL_iMAGES') }}/404.gif" alt="image 404 page">
+            <img src="{{ app.themeOptions.getParam('urlImg') }}/404.gif" alt="image 404 page">
         </div>
         <div class="link-back-404">
             <a href="{{ wp_call_func('get_home_url') }}">Вернуться на главную</a>

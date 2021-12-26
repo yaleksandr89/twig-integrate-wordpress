@@ -8,8 +8,11 @@ class ChangingTemplatePath
 {
     use Filesystem;
 
-    public function __construct()
+    private ThemeOptions $themeOptions;
+
+    public function __construct(ThemeOptions $themeOptions)
     {
+        $this->themeOptions = $themeOptions;
         add_filter('index' . '_template_hierarchy', [$this, 'changingTemplatePath']);
         add_filter('404' . '_template_hierarchy', [$this, 'changingTemplatePath']);
         add_filter('archive' . '_template_hierarchy', [$this, 'changingTemplatePath']);
@@ -43,8 +46,8 @@ class ChangingTemplatePath
 
             // Проверка существования директорий и в случае отсутствия - создание
             $this->createFolderIfNotExist([
-                WP_TWIG_DIR_PATH . $pathSysToTemplate,
-                WP_TWIG_DIR_PATH . $pathCustomToTemplate,
+                $this->themeOptions->getParam('dirTemplates') . $pathSysToTemplate,
+                $this->themeOptions->getParam('dirTemplates') . $pathCustomToTemplate,
             ]);
 
             $element = $this->changingExtensionTemplate($el, 'twig');

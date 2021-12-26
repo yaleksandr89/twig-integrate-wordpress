@@ -6,9 +6,6 @@
     "autoload": {
         "psr-4": {
             "FunctionsModules\\": "functions-modules/"
-        },
-        "files": [
-          "functions-modules/Utils/Helper/constants.php"
-        ]
+        }
     }
 }

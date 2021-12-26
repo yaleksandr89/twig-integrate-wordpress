@@ -2,6 +2,7 @@
 
 namespace FunctionsModules\Twig;
 
+use FunctionsModules\ThemeOptions;
 use FunctionsModules\Twig\Extension\ArrayExtension;
 use FunctionsModules\Twig\Extension\IntlExtension;
 use FunctionsModules\Twig\Extension\SymfonyDebugExtension;
@@ -31,14 +32,18 @@ abstract class BaseTwigController
     /** @var Environment */
     protected Environment $environment;
 
-    /**
-     * @param array $directories
-     */
-    public function __construct(array $directories)
-    {
-        $this->createFolderIfNotExist($directories); // Проверка существования директорий и в случае отсутствия - создание
+    /** @var ThemeOptions  */
+    private ThemeOptions $themeOptions;
 
-        $loader = new FilesystemLoader($directories);
+    /**
+     * @param ThemeOptions $themeOptions
+     */
+    public function __construct(ThemeOptions $themeOptions)
+    {
+        $this->themeOptions = $themeOptions;
+        $this->createFolderIfNotExist([$themeOptions->getParam('dirTemplates')]); // Проверка существования директорий и в случае отсутствия - создание
+
+        $loader = new FilesystemLoader([$themeOptions->getParam('dirTemplates')]);
         $this->environment = new Environment($loader, [
             'debug' => true,
             'cache' => false,
@@ -57,12 +62,15 @@ abstract class BaseTwigController
         $this->environment->addExtension(new WpGetSidebarExtension()); // {% do get_sidebar() %} / {{ get_sidebar() }}
         $this->environment->addExtension(new WpRedefinedFunctionExtension()); // куча функций
         $this->environment->addExtension(new VariableConversionExtension()); // конвертация переменных (str->int, int->bool и т.д.)
+
         $this->environment->addGlobal('app', [
             'get' => $_GET,
             'post' => $_POST,
             'cookie' => $_COOKIE,
             'session' => $_SESSION ?? null,
+            'themeOptions' => $this->themeOptions,
         ]);
+        $this->themeOptions = $themeOptions;
     }
 
     /**

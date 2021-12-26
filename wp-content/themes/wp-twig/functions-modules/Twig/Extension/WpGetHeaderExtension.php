@@ -2,6 +2,7 @@
 
 namespace FunctionsModules\Twig\Extension;
 
+use FunctionsModules\ThemeOptions;
 use FunctionsModules\Utils\Filesystem;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -22,7 +23,8 @@ class WpGetHeaderExtension extends AbstractExtension
         return [
             new TwigFunction('get_header', [$this, 'getHeader'], [
                 'needs_environment' => true,
-                'is_safe'           => ['html']
+                'is_safe'           => ['html'],
+                'needs_context' => true
             ]),
         ];
     }
@@ -37,14 +39,18 @@ class WpGetHeaderExtension extends AbstractExtension
 
     /**
      * @param Environment $environment
+     * @param array $context
      * @param string|null $name
      *
      * @return void
      * @throws LoaderError
      */
-    public function getHeader(Environment $environment, ?string $name = null): void
+    public function getHeader(Environment $environment, array $context, ?string $name = null): void
     {
-        $dirTemplates = WP_TWIG_DIR_TEMPLATE;
+        /** @var ThemeOptions $themeOptions */
+        $themeOptions = $context['app']['themeOptions'];
+
+        $dirTemplates = $themeOptions->getParam('dirTemplates');
         $dirTemplate  = $dirTemplates . '/tpl-parts/';
         $tplName      = [];
         $this->createFolderIfNotExist([

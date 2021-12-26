@@ -2,6 +2,7 @@
 
 namespace FunctionsModules\Twig;
 
+use FunctionsModules\ThemeOptions;
 use FunctionsModules\Twig\StaticStorage\WpGlobalVariableStaticStorage;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -9,9 +10,12 @@ use Twig\Error\SyntaxError;
 
 class TwigController extends BaseTwigController
 {
-    public function __construct()
+    protected ThemeOptions $themeOptions;
+
+    public function __construct(ThemeOptions $themeOptions)
     {
-        parent::__construct([WP_TWIG_DIR_TEMPLATE]);
+        $this->themeOptions = $themeOptions;
+        parent::__construct($this->themeOptions);
         add_filter('template_include', [$this, 'template_include']);
     }
 
@@ -32,11 +36,11 @@ class TwigController extends BaseTwigController
         preg_match('/template-canvas.php/', $template, $templateNotFound);
 
         if ('template-canvas.php' === array_pop($templateNotFound)) {
-            $pathToSystemTemplate = WP_TWIG_DIR_TEMPLATE . '/' . $tplFolder;
+            $pathToSystemTemplate = '/' . $this->themeOptions->getParam('dirTemplates') . '/' . $tplFolder;
             $this->creatingTemplateIfNotExist($pathToSystemTemplate, $tplFolder, $tplExtension);
         } else {
             $tplName = str_replace($tplExtension, '', $findTemplate[1]);
-            $this->render($tplName, $this->getWpGlobalVariable());
+            $this->render('/' . $tplName, $this->getWpGlobalVariable());
         }
     }
 
