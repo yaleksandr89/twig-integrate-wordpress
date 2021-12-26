@@ -1,13 +1,13 @@
 <!doctype html>
-<html {% do call_wp_func('language_attributes') %}>
+<html {{ wp_call_func('language_attributes') }}>
 <head>
-    <meta charset="{% do call_wp_func('bloginfo', 'charset') %};">
+    <meta charset="{{ wp_call_func('bloginfo', 'charset') }};">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="profile" href="https://gmpg.org/xfn/11"/>
-    {% do call_wp_func('wp_head') %}
+    {{ wp_call_func('wp_head') }}
 </head>
-<body {% do call_wp_func('body_class') %}>
-{% do call_wp_func('wp_body_open') %}
+<body {{ wp_call_func('body_class') }}>
+{{ wp_call_func('wp_body_open') }}
 <div id="header">
     <h1>brewed coffee</h1>
 </div>

@@ -13,7 +13,7 @@ class WpCallingFunctionExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('call_wp_func', [$this, 'callingWordpressFunction']),
+            new TwigFunction('wp_call_func', [$this, 'callingWordpressFunction']),
         ];
     }
 
@@ -22,20 +22,25 @@ class WpCallingFunctionExtension extends AbstractExtension
      */
     public function getName(): string
     {
-        return 'call_wp_func';
+        return 'wp_call_func';
     }
 
-    public function callingWordpressFunction(string $nameWpFunction, $arg = ''): void
+    /**
+     * @param string $nameWpFunction
+     * @param string $arg
+     *
+     * @return mixed
+     */
+    public function callingWordpressFunction(string $nameWpFunction, string $arg = ''): mixed
     {
-
         if (function_exists( $nameWpFunction)){
             if ('' !== $arg) {
-                $nameWpFunction($arg);
-            } else {
-                $nameWpFunction();
+                return $nameWpFunction($arg);
             }
-        } else {
-            echo 'Функция не найдена!';
+
+            return $nameWpFunction();
         }
+
+        return 'Функция не найдена!';
     }
 }

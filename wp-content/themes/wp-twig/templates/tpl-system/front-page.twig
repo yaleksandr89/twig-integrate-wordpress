@@ -1,29 +1,33 @@
-{% do get_header('header-test') %}
+{{ get_header() }}
 <div id="page">
     <div id="content">
-        <div class="post">
-            <h1 class="title">About This Website</h1>
-            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
-            <div class="entry">
-                <p><strong>Brewed Coffee </strong> is a free template from <a href="http://freecsstemplates.org/">Free CSS Templates</a> released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>. The flower photo is fromt <a href="http://www.pdphoto.org/">PDPhoto.org</a>. You're free to use this template for both commercial or personal use. I only ask that you link back to <a href="http://freecsstemplates.org/">my site</a> in some way. Enjoy :)</p>
-            </div>
-        </div>
-        <div class="post">
-            <h2 class="title">Risus Pellentesque Pharetra</h2>
-            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
-            <div class="entry">
-                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. </p>
-                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Proin gravida orci  enim accumsan lacinia. </p>
-            </div>
-        </div>
-        <div class="post">
-            <h2 class="title">Porttitor Enim Accumsan</h2>
-            <p class="byline"><small>Posted on August 25th, 2007 by <a href="#">admin</a> | <a href="#">Edit</a></small></p>
-            <div class="entry">
-                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. </p>
-                <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Proin gravida orci  enim accumsan lacinia. </p>
-            </div>
-        </div>
+
+        {% if wp_the_loop()|length > 0  %}
+            {% for post in wp_the_loop() %}
+                <div class="post">
+                    <h1 class="title">
+                        <a href="{{ wp_call_func('get_permalink') }}">
+                            {{ post.post_title }}
+                        </a>
+                    </h1>
+                    <p class="byline">
+                        <small>
+                            Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY')}} by
+                            {{ wp_call_func('the_author_posts_link') }}
+                            {% if wp_call_func('is_user_logged_in') and post.post_author == wp_call_func('get_current_user_id') %}
+                                |
+                                <a href="{{ wp_call_func('get_edit_post_link', post.ID) }}">Edit</a>
+                            {% endif %}
+                        </small>
+                    </p>
+                    <div class="entry">
+                        {{ wp_call_func('get_the_excerpt', post.ID) }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Записи отсутствуют.</p>
+        {% endif %}
     </div>
     <div id="sidebar">
         <ul>
@@ -55,4 +59,4 @@
         </ul>
     </div>
 </div>
-{% do get_footer() %}
+{{ get_footer() }}

@@ -1,6 +1,6 @@
 <div id="footer">
     <p>&copy;{{ 'now'|date('Y')}} All Rights Reserved &nbsp;&bull;&nbsp; Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a> &nbsp;&bull;&nbsp; Icons by <a href="http://www.famfamfam.com/">FAMFAMFAM</a>.</p>
 </div>
-{% do call_wp_func('wp_footer') %}
+{{ wp_call_func('wp_footer') }}
 </body>
 </html>
