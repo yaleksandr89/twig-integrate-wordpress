@@ -2,5 +2,13 @@
     "require": {
         "symfony/var-dumper": "^6.0",
         "twig/twig": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FunctionsModules\\": "functions-modules/"
+        },
+        "files": [
+            "init/constants.php"
+        ]
     }
 }
