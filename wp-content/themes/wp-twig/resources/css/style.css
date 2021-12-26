@@ -142,6 +142,13 @@ hr {
 	color: #646464;
 }
 
+.byline_down {
+	margin: 0;
+	padding-left: 33px;
+	border-bottom: 1px solid #CCCCCC;
+	color: #646464;
+}
+
 .meta {
 	text-align: left;
 	color: #646464;

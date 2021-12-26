@@ -2,12 +2,46 @@
 {% set postAuthorId = post.post_author|to_int %}
 {% set firstLastNameAuthor = wp_call_func('get_the_author_meta', 'user_firstname',postAuthorId) ~ ' ' ~ wp_call_func('get_the_author_meta', 'user_lastname',postAuthorId) %}
 
+{% set postAuthorId = post.ID|to_int %}
+{% set categories = wp_call_func('get_the_terms', postAuthorId, 'category') %}
+{% set tags = wp_call_func('get_the_terms', postAuthorId, 'post_tag') %}
+
 {{ get_header() }}
 <div id="page">
     <div id="content">
         <h2>{{ post.post_title }}</h2>
-        <small>{{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }}</small><br>
-        <small>Author: {{ firstLastNameAuthor }}</small>
+        <p class="byline">
+            <small>
+                Posted on {{ wp_call_func('get_the_date')|date('U')|localizeddate('long','none',null, null, 'dd MMMM YYYY') }} by
+                {{ wp_call_func('the_author_posts_link') }}
+            </small>
+            <br>
+            <small>
+                Author: {{ firstLastNameAuthor }}
+            </small>
+        </p>
+        <p class="byline_down">
+            <small>
+                Tags:
+                {% for tag in tags %}
+                    <a href="{{ wp_call_func('get_tag_link', tag.term_id) }}">
+                        {{ tag.name }}
+                    </a>
+                    {% if loop.length > 1 and loop.first != false %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            </small>
+            <br>
+            <small>
+                Categories:
+                {% for category in categories %}
+                    <a href="{{ wp_call_func('get_category_link', category.term_id) }}">
+                        {{ category.name }}
+                    </a>
+                {% endfor %}
+            </small>
+        </p>
         <div>{{ post.post_content|raw }}</div>
         <div>
             <a href="{{ wp_call_func('get_home_url') }}">Вернуться на главную</a>
