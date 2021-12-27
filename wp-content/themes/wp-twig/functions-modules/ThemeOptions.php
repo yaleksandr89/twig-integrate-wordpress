@@ -172,4 +172,31 @@ class ThemeOptions
     {
         return $this->$name;
     }
+
+    /**
+     * @param array $directives
+     * @param bool $clearDefaultDirective
+     *
+     * @return void
+     */
+    public function addedDirectivesToRobotsTxt(array $directives, bool $clearDefaultDirective = false): void
+    {
+        // -1 before wp-sitemap.xml
+        add_action('robots_txt', function ($output) use ($directives, $clearDefaultDirective) {
+
+            if ($clearDefaultDirective) {
+                $output = '';
+            }else {
+                $output .= "\n";
+            }
+
+            foreach ($directives as $directive) {
+                $directive = trim($directive);
+                $directive = preg_replace( '/^[\t ]+(?!#)/mU', '', $directive );
+                $output .= $directive . "\n";
+            }
+
+            return $output;
+        }, -1);
+    }
 }

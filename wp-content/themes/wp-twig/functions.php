@@ -27,6 +27,10 @@ $themeOptions->addThemeSupport('html5',[
 $themeOptions->connectCss([
     'style.css'
 ]);
+$themeOptions->addedDirectivesToRobotsTxt([
+    'User-agent: *',
+    'Disallow: /',
+], true);
 
 /*
 |--------------------------------------
