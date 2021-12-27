@@ -41,8 +41,8 @@ class ChangingTemplatePath
     public function changingTemplatePath(array $template): array
     {
         return array_map(function ($el) {
-            $pathSysToTemplate    = '/templates/tpl-system/';
-            $pathCustomToTemplate = '/templates/tpl-custom/';
+            $pathSysToTemplate    = '/tpl-system/';
+            $pathCustomToTemplate = '/tpl-custom/';
 
             // Проверка существования директорий и в случае отсутствия - создание
             $this->createFolderIfNotExist([
