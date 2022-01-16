@@ -41,22 +41,19 @@ class ChangingTemplatePath
     public function changingTemplatePath(array $template): array
     {
         return array_map(function ($el) {
-            $pathSysToTemplate    = '/tpl-system/';
-            $pathCustomToTemplate = '/tpl-custom/';
-
             // Проверка существования директорий и в случае отсутствия - создание
             $this->createFolderIfNotExist([
-                $this->themeOptions->getParam('dirTemplates') . $pathSysToTemplate,
-                $this->themeOptions->getParam('dirTemplates') . $pathCustomToTemplate,
+                $this->themeOptions->getParam('dirTemplates') . '/tpl-system/',
+                $this->themeOptions->getParam('dirTemplates') . '/tpl-custom/',
             ]);
 
             $element = $this->changingExtensionTemplate($el, 'twig');
 
             if ('front-page.twig' !== $element && str_contains($element, '-')) {
-                return $pathCustomToTemplate . $element;
+                return 'templates/tpl-custom/' . $element;
             }
 
-            return $pathSysToTemplate . $element;
+            return 'templates/tpl-system/' . $element;
         }, $template);
     }
 
