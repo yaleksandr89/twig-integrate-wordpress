@@ -44,17 +44,19 @@ class ThemeOptions
     private string $dirPlugins;
 
     /** @var string */
+    private string $dirNameTemplates = 'templates';
+
+    /** @var string */
     private string $dirTemplates;
 
     /** @var string */
     private string $themeVersion = '1.0.0';
 
     /** @var string */
-    private string $themePrefix;
+    private string $themePrefix = 'WP_TWIG_';
 
     public function __construct()
     {
-        $this->themePrefix   = 'WP_TWIG_';
         $this->dirPath       = get_template_directory();
         $this->dirCss        = get_template_directory() . '/resources/css';
         $this->urlCss        = get_template_directory_uri() . '/resources/css';

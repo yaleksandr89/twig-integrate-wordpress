@@ -50,10 +50,10 @@ class ChangingTemplatePath
             $element = $this->changingExtensionTemplate($el, 'twig');
 
             if ('front-page.twig' !== $element && str_contains($element, '-')) {
-                return 'templates/tpl-custom/' . $element;
+                return $this->themeOptions->getParam('dirNameTemplates') . '/tpl-custom/' . $element;
             }
 
-            return 'templates/tpl-system/' . $element;
+            return $this->themeOptions->getParam('dirNameTemplates') . '/tpl-system/' . $element;
         }, $template);
     }
 
